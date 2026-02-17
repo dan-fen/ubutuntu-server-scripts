@@ -5,42 +5,82 @@
 # Description: Basic shell script to monitor system resources
 # Author: Dan Fenton
 # Date: 16-02-2026
-# Version: 1.0
+# Version: 1.1
 # ============================================
 
 # --- Variables ---
-LOG_FILE="/var/log/system_monitor.log"
+LOG_FILE="$HOME/system_monitor.log"
 TIMESTAMP=$(date)
-SOURCE_DIR="/usr/local/bin"
 
 # --- Functions ---
 
-# Obtain memory values
-total_mem=$(free -m | grep Mem: | awk '{print $2}')
-used_mem=$(free -m | grep Mem: | awk '{print $3}')
-percentage_used=$((used_mem * 100 / total_mem))
+# Display header
+# ----------------
+display_header() {
+    echo -e "====================================================="
+    echo -e "System Monitor Script - $TIMESTAMP"
+    echo -e "====================================================="
+    echo -e "\nHello, $USER!"
+    echo -e "\nI am just running some system monitoring checks..."
+}
+
+# Check memory values
+# --------------------
+check_memory() {
+    local total_mem=$(free -m | grep Mem: | awk '{print $2}')
+    local used_mem=$(free -m | grep Mem: | awk '{print $3}')
+    local percentage_used=$((used_mem * 100 / total_mem))        # Convert to percentage value
+    echo -e "\nMemory:\n-------------\nThe current memory usage is $percentage_used%"
+}
+
+# Get CPU usage
+# --------------
+check_cpu() {
+    local cpu_usage=$(ps aux | awk 'NR>1 {print $2, $3, $11}' | sort -k2 -rn | head -5)
+    echo -e "\nCPU:\n-------------\nHere are the top 5 processes by CPU % used..."
+    echo "---------------------------"
+    echo "PID  |  %CPU  | COMMAND"
+    echo "---------------------------"
+    echo "$cpu_usage"
+    # Advice on CPU management
+    echo -e "\nNote: If you want to kill any of these processes, you can run the following command:"
+    echo "sudo kill -9 <PID>"
+}
+
+# Check disk usage
+# -----------------
+check_disk() {
+    local disk_usage=$(df -h | sort -k5 -n)
+    echo -e "\nDisk usage:\n--------------"
+    echo "$disk_usage"
+}
+
+# Check uptime
+# -------------
+check_uptime() {
+    local server_uptime=$(uptime -p)
+    echo -e "\nUptime:\n-------------\nThe server has been up for: $server_uptime"
+}
 
 # --- Main ---
+
 # Header
-echo "Hello, $USER! Today's date is $TIMESTAMP."
-echo "I am just running some system maintenance checks..."
+# --------
+display_header | tee -a "$LOG_FILE"
 
 # Memory usage
-echo "The current memory usage is $percentage_used%"
+# -------------
+check_memory | tee -a "$LOG_FILE"
 
 # CPU usage
-echo "Here are the top 5 processes by CPU % used..."
-echo "PID    %CPU   COMMAND"
-ps aux | awk 'NR>1 {print $2, $3, $11}' | sort -k2 -rn | head -5
-# Advice on CPU management
-echo "Note: If you want to kill any of these processes, you can run the following command:"
-echo "sudo kill -9 <PID>"
+# ----------
+check_cpu | tee -a "$LOG_FILE"
 
 # Disk usage
-echo "Just checking disk usage for you now..."
-df -h | sort -k4 -n
+# ------------
+check_disk | tee -a "$LOG_FILE"
 
 # Server uptime
-echo "Finally, I'll just check the server uptime..."
-uptime | awk {'print $1, $2, $3'} | tr -d ','
-echo "Please consider rebooting the server if it has an uptime of more than a week."
+# --------------
+check_uptime | tee -a "$LOG_FILE"
+ 
