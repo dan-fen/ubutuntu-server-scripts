@@ -4,12 +4,12 @@
 # Script Name: system-monitor.sh
 # Description: Basic shell script to monitor system resources
 # Author: Dan Fenton
-# Date: 16-02-2026
+# Date: 17-02-2026
 # Version: 1.1
 # ============================================
 
 # --- Variables ---
-LOG_FILE="$HOME/system_monitor.log"
+LOG_FILE="system_monitor.log"
 TIMESTAMP=$(date)
 
 # --- Functions ---
