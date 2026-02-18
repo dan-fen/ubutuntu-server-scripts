@@ -29,3 +29,7 @@ Thumbs.db
 
 # Shell script artifacts
 *.bak
+
+# Ignore setup_template.sh since it's a template and not meant to be executed directly
+setup_template.sh
+
