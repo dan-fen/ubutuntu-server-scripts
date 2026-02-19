@@ -33,3 +33,8 @@ Thumbs.db
 # Ignore setup_template.sh since it's a template and not meant to be executed directly
 setup_template.sh
 
+# Ignore .env files since they may contain sensitive information
+*.env
+
+# Ignore exclude list files since they may contain sensitive information
+exclude-list.txt
