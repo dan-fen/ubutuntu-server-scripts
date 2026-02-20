@@ -18,7 +18,7 @@ source $SCRIPT_DIR/.env
 # --- Variables ---
 TIMESTAMP=$(date)
 SOURCE_DIR=/home/$USER/
-BACKUP_DIR=$DEST_DIR/$(date +%Y-%m-%d)/
+BACKUP_DIR=$DEST_DIR/home/$(date +%Y-%m-%d)/
 EXCLUDE_FILE=$SCRIPT_DIR/exclude-list.txt
 
 # --- Functions ---
