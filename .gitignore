@@ -38,3 +38,6 @@ setup_template.sh
 
 # Ignore exclude list files since they may contain sensitive information
 exclude-list.txt
+
+#Ignore templates directory
+templates/
