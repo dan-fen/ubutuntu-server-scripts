@@ -41,6 +41,8 @@ exclude-list.txt
 
 #Ignore templates directory
 templates/
+
+# Ignore agent skills
 skills-lock.json
 .agents/skills/code-simplifier/AGENTS.md
 .agents/skills/code-simplifier/README.md
@@ -59,7 +61,6 @@ skills-lock.json
 .agents/skills/code-simplifier/references/dead-keep-why-comments.md
 .agents/skills/code-simplifier/references/dead-remove-obvious-comments.md
 .agents/skills/code-simplifier/references/dead-remove-todo-fixme.md
-.gitignore
 .agents/skills/code-simplifier/references/dead-remove-unused.md
 .agents/skills/code-simplifier/references/dup-avoid-over-abstraction.md
 .agents/skills/code-simplifier/references/dup-data-driven.md
@@ -95,3 +96,12 @@ skills-lock.json
 .agents/skills/code-simplifier/references/scope-respect-boundaries.md
 .claude/skills/code-simplifier
 .qwen/skills/code-simplifier
+
+# Ignore exclude lists
+backups/archive/exclude-list-data.txt
+backups/archive/exclude-list-home.txt
+backups/rsync/exclude-list.txt
+
+# Ignore .gitignore
+.gitignore
+.gitignore
