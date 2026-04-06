@@ -1,4 +1,0 @@
-# === Exclude List ===
-.cache
-*.log
-logs/
