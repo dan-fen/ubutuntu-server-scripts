@@ -1,8 +1,0 @@
-# === Exclude List ===
-.cache
-*.log
-logs/
-.obsidian-cli.sock
-.john
-.ollama
-.zcompdump*
